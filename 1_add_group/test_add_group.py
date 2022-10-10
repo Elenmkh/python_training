@@ -9,12 +9,12 @@ import unittest, time, re
 from group import Group
 
 
-class UntitledTestCase(unittest.TestCase):
+class test_add_group(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    def test_add_group(self):
+    def test_test_add_group(self):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
@@ -24,7 +24,7 @@ class UntitledTestCase(unittest.TestCase):
         self.logout(wd)
 
 
-    def test_add_empty_group(self):
+    def test_test_add_empty_group(self):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
