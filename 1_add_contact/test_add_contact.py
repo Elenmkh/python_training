@@ -104,9 +104,10 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("byear").send_keys(Contact.b_year)
         #fill Anniversary form
         wd.find_element_by_name("aday").click()
-        wd.find_element_by_xpath(f"//div[@id='content']/form/select[3]/option[{Contact.a_day}]").click()
+        wd.find_element_by_xpath(f"//option[@value='{Contact.a_day}']").click()
+        #wd.find_element_by_xpath(f"//div[@id='content']/form/option[{Contact.a_day}]").click()
         wd.find_element_by_name("amonth").click()
-        wd.find_element_by_css_selector(f"[name =amonth] option[value= '{Contact.a_month}']").click()
+        wd.find_element_by_xpath(f"//div[@id='content']/form/select[4]/option[{Contact.a_month}]").click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").send_keys(Contact.a_year)
         #fill secondary form
