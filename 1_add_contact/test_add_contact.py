@@ -23,14 +23,14 @@ class test_add_contact(unittest.TestCase):
         self.return_to_home_page(wd)
         self.logout(wd)
 
-    def add_empty_contact(self):
+    def test_test_add_empty_contact(self):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.add_contact(wd, Contact(firstname="", middlename="", lastname="", nickname="",
                     title="", company="", address="", home_phone="", mobile_phone="", work_phone="",
-                    fax="", email="", email2="", email3="", homepage="", b_day="-",
-                    b_month="-", b_year="", a_day="-", a_month="-", a_year="", address2="",
+                    fax="", email="", email2="", email3="", homepage="", b_day="0",
+                    b_month="-", b_year="", a_day="0", a_month="-", a_year="", address2="",
                     phone2="", notes=""))
         self.return_to_home_page(wd)
         self.logout(wd)
@@ -104,10 +104,9 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("byear").send_keys(Contact.b_year)
         #fill Anniversary form
         wd.find_element_by_name("aday").click()
-        wd.find_element_by_xpath(f"//option[@value='{Contact.a_day}']").click()
-        #wd.find_element_by_xpath(f"//div[@id='content']/form/option[{Contact.a_day}]").click()
+        wd.find_element_by_xpath(f'//select[@name ="aday"]/option[@value="{Contact.a_day}"]').click()
         wd.find_element_by_name("amonth").click()
-        wd.find_element_by_xpath(f"//div[@id='content']/form/select[4]/option[{Contact.a_month}]").click()
+        wd.find_element_by_xpath(f'//select[@name ="amonth"]/option[@value="{Contact.a_month}"]').click()
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").send_keys(Contact.a_year)
         #fill secondary form
