@@ -1,47 +1,24 @@
-# -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import unittest
-from contact import Contact
 
-class test_add_contact(unittest.TestCase):
-    def setUp(self):
+
+class Application():
+    def __init__(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    def test_test_add_contact(self):
+    def logout(self):
         wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
-        self.add_contact(wd, Contact(firstname="Sergey", middlename="Aleksandrovich", lastname="Ivanov", nickname="s.ivanov",
-                    title="111", company="ivanov_co", address="Moscow", home_phone="99", mobile_phone="7910", work_phone="5516",
-                    fax="111", email="i.serg@mail.ru", email2="ttt", email3="eee", homepage="wewe", b_day="16",
-                    b_month="August", b_year="1978", a_day="16", a_month="December", a_year="2000", address2="russia",
-                    phone2="ggg", notes="gfjsk"))
-        self.return_to_home_page(wd)
-        self.logout(wd)
-
-    def test_test_add_empty_contact(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
-        self.add_contact(wd, Contact(firstname="", middlename="", lastname="", nickname="",
-                    title="", company="", address="", home_phone="", mobile_phone="", work_phone="",
-                    fax="", email="", email2="", email3="", homepage="", b_day="0",
-                    b_month="-", b_year="", a_day="0", a_month="-", a_year="", address2="",
-                    phone2="", notes=""))
-        self.return_to_home_page(wd)
-        self.logout(wd)
-
-    def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
-    def return_to_home_page(self, wd):
+    def return_to_home_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("home page").click()
 
-    def add_contact(self, wd, Contact):
+    def add_contact(self, Contact):
+        wd = self.wd
         # init contact creation
         wd.find_element_by_link_text("add new").click()
         #fill name form
@@ -124,30 +101,20 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("notes").send_keys(Contact.notes)
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.return_to_home_page()
 
-    def login(self, wd, username, password):
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").click()
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
-    def is_element_present(self, how, what):
-        try: self.wd.find_element(by=how, value=what)
-        except NoSuchElementException as e: return False
-        return True
-    
-    def is_alert_present(self):
-        try: self.wd.switch_to_alert()
-        except NoAlertPresentException as e: return False
-        return True
-
-    def tearDown(self):
+    def destroy(self):
         self.wd.quit()
-
-
-if __name__ == "__main__":
-    unittest.main()
