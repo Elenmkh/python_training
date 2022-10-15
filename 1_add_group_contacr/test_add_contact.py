@@ -1,6 +1,6 @@
-from contact import Contact
+from group import Contact
 import pytest
-from application_contact import Application
+from application import Application
 
 
 @pytest.fixture()
