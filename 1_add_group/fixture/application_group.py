@@ -1,9 +1,22 @@
+<<<<<<<< HEAD:1_add_group/fixture/application_group.py
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+========
+import pytest
+from group import Group
+from application_group import Application
+
+@pytest.fixture()
+def app(request):
+    fixture = Application()
+    request.addfinalizer(fixture.destroy)
+    return fixture
+>>>>>>>> parent of 92f376e (Revert "Перевод тестов на pytest"):1_add_group/test/test_add_group.py
 
 class Application:
 
+<<<<<<<< HEAD:1_add_group/fixture/application_group.py
     def __init__(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
@@ -59,3 +72,15 @@ class Application:
 
 
 
+========
+def test_test_add_group(app):
+    app.login(username="admin", password="secret")
+    app.create_group(Group(name="ffff", header="ggg", footer="hghg"))
+    app.logout()
+
+
+def test_test_add_empty_group(app):
+    app.login(username="admin", password="secret")
+    app.create_group(Group(name="", header="", footer=""))
+    app.logout()
+>>>>>>>> parent of 92f376e (Revert "Перевод тестов на pytest"):1_add_group/test/test_add_group.py
