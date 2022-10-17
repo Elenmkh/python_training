@@ -8,7 +8,7 @@ class GroupHelper():
         wd.find_element_by_link_text("group page").click()
 
 
-    def create_group(self, group):
+    def create(self, group):
         wd = self.app.wd
         self.open_groups_page(wd)
         # init group creation
@@ -37,7 +37,7 @@ class ContactHelper():
         self.app = app
 
 
-    def add_contact(self, contact):
+    def add(self, contact):
         wd = self.app.wd
         # init contact creation
         wd.find_element_by_link_text("add new").click()
