@@ -130,3 +130,18 @@ class ContactHelper():
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.app.return_to_home_page()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # delete
+        wd.find_element_by_xpath('//*[@value="Delete"]').click()
+
+
+    def edit_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # submit delition
+        wd.find_element_by_xpath('//*[@title = "Edit"]').click()
+        wd.find_element_by_name("firstname")
+
