@@ -49,7 +49,7 @@ class GroupHelper():
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
 
-    def edit_first_group(self, group):
+    def modify_first_group(self, group):
         wd = self.app.wd
         self.open_groups_page(wd)
         self.select_first_group()
@@ -176,7 +176,7 @@ class ContactHelper():
         wd.find_element_by_xpath('//*[@value="Delete"]').click()
 
 
-    def edit_first_contact(self):
+    def modify_first_contact(self):
         wd = self.app.wd
         self.open_contact_page(wd)
         # select first contact
