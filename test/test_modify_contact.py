@@ -1,4 +1,4 @@
-from model.group import Contact
+from model.contact import Contact
 
 def test_test_edit_contact(app):
     app.session.login(username="admin", password="secret")
