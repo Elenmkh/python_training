@@ -1,6 +1,6 @@
 from model.contact import Contact
 
-def test_test_edit_contact(app):
+def test_test_modify_contact(app):
     app.session.login(username="admin", password="secret")
     app.contact.modify_first_contact()
     app.contact.completation_form(Contact(firstname="Ivan", middlename="Ivanovovich", lastname="Ivanov", nickname="iv",
@@ -8,4 +8,10 @@ def test_test_edit_contact(app):
                             fax="666", email="iv.iv@gmail.ru", email2="ish@", email3="p", homepage="contact", b_day="13",
                             b_month="April", b_year="1966", a_day="13", a_month="july", a_year="1999", address2="Moscow",
                             phone2="**", notes="коллега"))
+    app.session.logout()
+
+
+def test_test_modify_contact_name(app):
+    app.session.login(username="admin", password="secret")
+    app.contact.modify_first_contact(Contact(firstname="Grisha", notes="к"))
     app.session.logout()
