@@ -28,3 +28,9 @@ class Contact:
         self.address2 = address2
         self.phone2 = phone2
         self.notes = notes
+
+    def __repr__(self):
+        return "%s, %s : %s" % (self.firstname, self.lastname, self.address)
+
+    def __eq__(self, other):
+        return self.firstname == other.firstname and self.lastname == other.lastname and self.address == other.address

@@ -104,10 +104,10 @@ class ContactHelper():
         wd = self.app.wd
         self.open_contact_page(wd)
         contacts = []
-        for element in wd.find_elements_by_xpath('//*[@id="maintable"]/tbody/tr'):
-            firstname = element.find_element_by_xpath('//td[1]')
-            lastname = element.find_element_by_xpath('//td[2]')
-            address = element.find_element_by_xpath('//td[3]')
+        for element in wd.find_elements_by_xpath('//*[@name="entry"]'):
+            firstname = element.find_element_by_xpath('//td[2]').text
+            lastname = element.find_element_by_xpath('//td[3]').text
+            address = element.find_element_by_xpath('//td[4]').text
             contacts.append(Contact(firstname=firstname, lastname=lastname, address=address ))
         return contacts
 
