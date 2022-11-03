@@ -1,3 +1,5 @@
+from model.contact import Contact
+
 class ContactHelper():
     def __init__(self, app):
         self.app = app
@@ -77,6 +79,7 @@ class ContactHelper():
         # delete
         wd.find_element_by_xpath('//*[@value="Delete"]').click()
 
+
     def edit_first_contact(self):
         wd = self.app.wd
         self.open_contact_page(wd)
@@ -96,4 +99,16 @@ class ContactHelper():
         wd = self.app.wd
         self.open_contact_page(wd)
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_contact_page(wd)
+        contacts = []
+        for element in wd.find_elements_by_xpath('//*[@id="maintable"]/tbody/tr'):
+            firstname = element.find_element_by_xpath('//td[1]')
+            lastname = element.find_element_by_xpath('//td[2]')
+            address = element.find_element_by_xpath('//td[3]')
+            contacts.append(Contact(firstname=firstname, lastname=lastname, address=address ))
+        return contacts
+
 
