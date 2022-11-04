@@ -105,10 +105,11 @@ class ContactHelper():
         self.open_contact_page(wd)
         contacts = []
         for element in wd.find_elements_by_xpath('//*[@name="entry"]'):
+            id = element.find_element_by_css_selector('[type="checkbox"]').get_attribute("id")
             firstname = element.find_element_by_css_selector('td:not(.center)').text
             lastname = element.find_element_by_css_selector('td:not(.center)').text
             address = element.find_element_by_css_selector('td:not(.center)').text
-            contacts.append(Contact(firstname=firstname, lastname=lastname, address=address ))
+            contacts.append(Contact(id=id, firstname=firstname, lastname=lastname, address=address ))
         return contacts
 
 
