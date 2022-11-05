@@ -106,8 +106,8 @@ class ContactHelper():
         contacts = []
         for element in wd.find_elements_by_xpath('//*[@name="entry"]'):
             id = element.find_element_by_css_selector('[type="checkbox"]').get_attribute("id")
-            firstname = element.find_element_by_css_selector('td:nth-child(2)').text
-            lastname = element.find_element_by_css_selector('td:nth-child(3)').text
+            lastname = element.find_element_by_css_selector('td:nth-child(2)').text
+            firstname = element.find_element_by_css_selector('td:nth-child(3)').text
             address = element.find_element_by_css_selector('td:nth-child(4)').text
             contacts.append(Contact(id=id, firstname=firstname, lastname=lastname, address=address))
         return contacts
