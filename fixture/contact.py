@@ -80,22 +80,22 @@ class ContactHelper():
 
     def delete_contact_by_index(self, index):
         wd = self.app.wd
-        self.edit_contact_by_index(index)
+        self.choose_contact_by_index(index)
         # delete
         wd.find_element_by_xpath('//*[@value="Delete"]').click()
         self.contact_cache = None
 
 
     def edit_first_contact(self):
-        self.edit_contact_by_index(0)
+        self.choose_contact_by_index(0)
 
-    def edit_contact_by_index(self, index):
+    def choose_contact_by_index(self, index):
         wd = self.app.wd
         self.open_contact_page(wd)
         # select first contact
-        wd.find_elements_by_name("selected[]")[index].click()
+        #wd.find_elements_by_name("selected[]")[index].click()
         # submit delition
-        wd.find_element_by_xpath('//*[@title = "Edit"]').click()
+        wd.find_elements_by_css_selector('[title = "Edit"]')[index].click()
         wd.find_element_by_name("firstname")
 
     def modify_first_contact(self, new_contact):
@@ -103,7 +103,7 @@ class ContactHelper():
 
 
     def modify_contact_by_index(self,index, new_contact):
-        self.edit_contact_by_index(index)
+        self.choose_contact_by_index(index)
         wd = self.app.wd
         self.fill_contact_form(new_contact)
         self.apply_edit()
@@ -126,6 +126,6 @@ class ContactHelper():
                 firstname = element.find_element_by_css_selector('td:nth-child(3)').text
                 address = element.find_element_by_css_selector('td:nth-child(4)').text
                 self.contact_cache.append(Contact(id=id, firstname=firstname, lastname=lastname, address=address))
-        return self.contact_cache
+        return list(self.contact_cache)
 
 
