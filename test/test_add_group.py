@@ -2,7 +2,7 @@ from model.group import Group
 import pytest
 import random
 import string
-
+import re
 
 def random_string(prefix, maxlen):
     symbols = string.ascii_letters+string.digits+" "*10#+string.punctuation
