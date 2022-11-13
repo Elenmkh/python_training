@@ -21,13 +21,13 @@ def test_test_add_group(app, group):
     assert len(old_groups)+1 == app.group.count()
     new_groups = app.group.get_group_list()
     old_groups.append(group)
-    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+    assert clear(sorted(old_groups, key=Group.id_or_max)) == sorted(new_groups, key=Group.id_or_max)
 
-def add_empty_group(app):
-    old_groups = app.group.get_group_list()
-    group = Group(name="ffff", header="ggg", footer="hghg")
-    app.group.create(group)
-    new_groups = app.group.get_group_list()
-    assert len(old_groups) + 1 == len(new_groups)
-    old_groups.append(group)
-    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+
+def clear(group):
+    for i in group:
+        if i.name is not None:
+            i.name = ' '.join(i.name.split())
+            i.name = i.name.strip()
+    return group
+

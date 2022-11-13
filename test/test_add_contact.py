@@ -47,21 +47,16 @@ def test_test_add_contact(app, contacts):
     assert len(old_contacts)+1 == app.contact.count()
     new_contacts = app.contact.get_contact_list()
     old_contacts.append(contacts)
-    assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
+    assert sorted(delete_symbols(old_contacts), key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
 
 
-def _add_empty_contact(app):
-    old_contacts = app.contact.get_contact_list()
-    contacts = Contact(firstname="", middlename="", lastname="", nickname="",
-                       title="", company="", address="", home_phone="", mobile_phone="", work_phone="",
-                       fax="", email="", email2="", email3="", homepage="", b_day="0",
-                       b_month="-", b_year="", a_day="0", a_month="-", a_year="", address2="",
-                       secondaryphone="", notes="")
-    app.contact.add()
-    app.contact.fill_contact_form(contacts)
-    app.contact.aply_create()
-    assert len(old_contacts) + 1 == app.contact.count()
-    new_contacts = app.contact.get_contact_list()
-    old_contacts.append(contacts)
-    assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
+def clear(contact):
+    for i in [contact.firstname, contact.lastname, contact.address]:
+        if i is not None:
+            i = ' '.join(i.split())
+            i = i.strip()
+    return contact
+
+def delete_symbols(contact):
+    return list(map(lambda x: clear(x), contact))
 
