@@ -6,7 +6,7 @@ class Contact:
                  title=None, company=None, address=None, home_phone=None, mobile_phone=None, work_phone=None,
                  fax=None, email=None, email2=None, email3=None, homepage=None, b_day=None, b_month=None,
                  b_year=None, a_day=None, a_month=None, a_year=None, address2=None, secondaryphone=None, notes=None,
-                 id=None, all_phones_from_homepage=None):
+                 id=None, all_phones_from_homepage=None, all_email_from_homepage=None):
         self.firstname = firstname
         self.middlename = middlename
         self.lastname = lastname
@@ -33,6 +33,7 @@ class Contact:
         self.notes = notes
         self.id = id
         self.all_phones_from_homepage = all_phones_from_homepage
+        self.all_email_from_homepage = all_email_from_homepage
 
     def __repr__(self):
         return "%s: %s, %s, %s" % (self.id, self.firstname, self.lastname, self.address)
