@@ -9,13 +9,16 @@ def test_all_info_on_home_page(app):
     assert contact_from_home_page.lastname == contact_from_edit_page.lastname
     assert contact_from_home_page.firstname == contact_from_edit_page.firstname
     assert contact_from_home_page.address == contact_from_edit_page.address
-    assert contact_from_home_page.all_phones_from_homepage == merge_info_like_on_home_page(phones)
-    assert contact_from_home_page.all_email_from_homepage == merge_info_like_on_home_page(emails)
+    assert contact_from_home_page.all_phones_from_homepage == merge_phone_like_on_home_page(phones)
+    assert contact_from_home_page.all_email_from_homepage == merge_email_like_on_home_page(emails)
 
 
 
 def clear(s):
     return re.sub("[() -]", "", s)
 
-def merge_info_like_on_home_page(contact):
+def merge_phone_like_on_home_page(contact):
     return "\n".join(filter(lambda x: x !="", map(lambda x: clear(x), filter(lambda x: x is not None, contact))))
+
+def merge_email_like_on_home_page(contact):
+    return "\n".join(filter(lambda x: x !="", filter(lambda x: x is not None, contact)))
