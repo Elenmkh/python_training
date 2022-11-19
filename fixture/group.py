@@ -69,7 +69,7 @@ class GroupHelper():
         self.open_groups_page(wd)
         self.select_group_by_index(index)
         #open modification form
-        wd.find_elements_by_name("edit")[index].click()
+        wd.find_element_by_name("edit").click()
         #fill group form
         self.fill_group_form(new_group)
         #submit

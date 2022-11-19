@@ -53,7 +53,10 @@ class ContactHelper():
         self.change_field_value("byear", contact.b_year)
         # fill Anniversary form
         self.change_date_value("aday", contact.a_day)
-        self.change_date_value("amonth", contact.a_month)
+        if len(wd.find_elements_by_name("update")) != 0:
+            self.change_date_value("amonth", contact.a_month.lower())
+        else:
+            self.change_date_value("amonth", contact.a_month)
         self.change_field_value("ayear", contact.a_year)
         # fill secondary form
         # wd.find_element_by_name("new_group").click()
@@ -61,6 +64,7 @@ class ContactHelper():
         self.change_field_value("address2", contact.address2)
         self.change_field_value("phone2", contact.secondaryphone)
         self.change_field_value("notes", contact.notes)
+
 
     def aply_create(self):
         wd = self.app.wd
