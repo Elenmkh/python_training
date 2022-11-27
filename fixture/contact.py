@@ -111,6 +111,27 @@ class ContactHelper():
         self.fill_contact_form(new_contact)
         self.apply_edit()
 
+    def modify_contact_by_id(self, id, new_contact):
+        self.choose_contact_by_id(id)
+        wd = self.app.wd
+        self.fill_contact_form(new_contact)
+        self.apply_edit()
+
+    def choose_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_contact_page(wd)
+        # select first contact
+        wd.find_elements_by_css_selector('[href$="id=%s"]' % id)[1].click()
+        wd.find_element_by_name("firstname")
+
+
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.choose_contact_by_id(id)
+        # delete
+        wd.find_element_by_xpath('//*[@value="Delete"]').click()
+        self.contact_cache = None
+
     def count(self):
         wd = self.app.wd
         self.open_contact_page(wd)
