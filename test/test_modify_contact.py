@@ -4,7 +4,7 @@ from model.contact import Contact
 from random import randrange
 
 
-def test_test_modify_contact(app, json_contact, db, check_ui):
+def test_modify_contact(app, json_contact, db, check_ui):
     if app.contact.count() == 0:
         app.contact.add()
         app.contact.fill_contact_form(json_contact)

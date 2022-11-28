@@ -2,7 +2,7 @@ from model.group import Group
 import random
 
 
-def test_test_modify_group_name(app, json_groups, db, check_ui):
+def test_modify_group_name(app, json_groups, db, check_ui):
     if app.group.count() == 0:
         app.group.create(Group(name="test"))
     old_groups = db.get_group_list()
