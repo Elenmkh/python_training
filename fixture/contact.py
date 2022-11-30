@@ -66,11 +66,30 @@ class ContactHelper():
         self.change_field_value("notes", contact.notes)
 
 
-    def change_group_value(self, text):
+    def change_group_value(self, id, name):
         wd = self.app.wd
-        if text is not None:
-            wd.find_element_by_name("new_group").click()
-            wd.find_element_by_css_selector(f'[name="new_group"]>[value="{text}"]').click()
+        if id is not None:
+            wd.find_element_by_css_selector(f'[name="{name}"]>[value="{id}"]').click()
+
+    def add_contact_to_group_by_id(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_contact_page(wd)
+        wd.find_element_by_css_selector('[type="checkbox"][id="%s"]' % contact_id).click()
+        wd.find_element_by_name("to_group").click()
+        name = "to_group"
+        self.change_group_value(group_id, name)
+        wd.find_element_by_css_selector('[value="Add to"]').click()
+
+    def delete_contact_from_group(self, contact_id, group_id):
+        wd = self.app.wd
+        self.open_contact_page(wd)
+        wd.find_elements_by_css_selector('[name="group"]')[0].click()
+        name = "group"
+        self.change_group_value(group_id, name)
+        wd.find_element_by_name("remove")
+        self.choose_contact_by_id(contact_id)
+        wd.find_element_by_css_selector('[name="remove"]').click()
+
 
     def aply_create(self):
         wd = self.app.wd
