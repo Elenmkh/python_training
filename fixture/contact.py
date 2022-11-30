@@ -66,6 +66,12 @@ class ContactHelper():
         self.change_field_value("notes", contact.notes)
 
 
+    def change_group_value(self, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name("new_group").click()
+            wd.find_element_by_css_selector(f'[name="new_group"]>[value="{text}"]').click()
+
     def aply_create(self):
         wd = self.app.wd
         # submit contact creation
