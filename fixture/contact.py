@@ -71,11 +71,11 @@ class ContactHelper():
         if id is not None:
             wd.find_element_by_css_selector(f'[name="{name}"]>[value="{id}"]').click()
 
-    def change_group_value_by_create(self, text):
+    def change_group_value_by_create(self, id):
         wd = self.app.wd
-        if text is not None:
+        if id is not None:
             wd.find_element_by_name("new_group").click()
-            wd.find_element_by_css_selector(f'[name="new_group"]>[value="{text}"]').click()
+            wd.find_element_by_css_selector(f'[name="new_group"]>[value="{id}"]').click()
 
 
     def add_contact_to_group_by_id(self, contact_id, group_id):
@@ -101,7 +101,7 @@ class ContactHelper():
         wd = self.app.wd
         self.open_contact_page(wd)
         # select first contact
-        wd.find_element_by_css_selector(f'f[type="checkbox"][id="{contact_id}"]').click()
+        wd.find_element_by_css_selector(f'[type="checkbox"][value="{contact_id}"]').click()
 
     def aply_create(self):
         wd = self.app.wd
