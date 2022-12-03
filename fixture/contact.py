@@ -71,6 +71,13 @@ class ContactHelper():
         if id is not None:
             wd.find_element_by_css_selector(f'[name="{name}"]>[value="{id}"]').click()
 
+    def change_group_value_by_create(self, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name("new_group").click()
+            wd.find_element_by_css_selector(f'[name="new_group"]>[value="{text}"]').click()
+
+
     def add_contact_to_group_by_id(self, contact_id, group_id):
         wd = self.app.wd
         self.open_contact_page(wd)
@@ -87,9 +94,14 @@ class ContactHelper():
         name = "group"
         self.change_group_value(group_id, name)
         wd.find_element_by_name("remove")
-        self.choose_contact_by_id(contact_id)
+        self.choose_checkbox_for_contact(contact_id)
         wd.find_element_by_css_selector('[name="remove"]').click()
 
+    def choose_checkbox_for_contact(self, contact_id):
+        wd = self.app.wd
+        self.open_contact_page(wd)
+        # select first contact
+        wd.find_element_by_css_selector(f'f[type="checkbox"][id="{contact_id}"]').click()
 
     def aply_create(self):
         wd = self.app.wd
