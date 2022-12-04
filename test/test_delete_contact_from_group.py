@@ -16,6 +16,7 @@ def test_add_contact_to_group(app, json_contact, orm_db):
         app.contact.fill_contact_form(json_contact)
         app.contact.change_group_value_by_create(random_group.id)
         app.contact.aply_create()
+        contacts = orm_db.get_contact_list()
     old_contacts = orm_db.get_contacts_in_group(random_group)
     if len(old_contacts) == 0:
         random_contact = random.choice(orm_db.get_contact_list())
